@@ -5,7 +5,7 @@ def preprocess_op():
 
     return dsl.ContainerOp(
         name='Preprocess Data',
-        image='gnovack/boston_pipeline_preprocessing:latest',
+        image='sayyeddocker/boston_pipeline_preprocessing:latest',
         arguments=[],
         file_outputs={
             'x_train': '/app/x_train.npy',
@@ -19,7 +19,7 @@ def train_op(x_train, y_train):
 
     return dsl.ContainerOp(
         name='Train Model',
-        image='gnovack/boston_pipeline_train:latest',
+        image='sayyeddocker/boston_pipeline_train:latest',
         arguments=[
             '--x_train', x_train,
             '--y_train', y_train
@@ -33,7 +33,7 @@ def test_op(x_test, y_test, model):
 
     return dsl.ContainerOp(
         name='Test Model',
-        image='gnovack/boston_pipeline_test:latest',
+        image='sayyeddocker/boston_pipeline_test:latest',
         arguments=[
             '--x_test', x_test,
             '--y_test', y_test,
@@ -48,7 +48,7 @@ def deploy_model_op(model):
 
     return dsl.ContainerOp(
         name='Deploy Model',
-        image='gnovack/boston_pipeline_deploy_model:latest',
+        image='sayyeddocker/boston_pipeline_deploy_model:latest',
         arguments=[
             '--model', model
         ]
