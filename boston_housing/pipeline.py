@@ -76,5 +76,6 @@ def boston_pipeline():
         dsl.InputArgumentPath(_train_op.outputs['model'])
     ).after(_test_op)
 
-client = kfp.Client()
+client = kfp.Client(host=f"{KUBEFLOW_ENDPOINT}/pipeline", cookies=auth_session["session_cookie"])
 client.create_run_from_pipeline_func(boston_pipeline, arguments={})
+print(client.list_experiments())
